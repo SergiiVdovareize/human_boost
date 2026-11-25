@@ -211,11 +211,8 @@ function main() {
   writeFileSync(changelogPath, updatedChangelog)
   console.log(`\x1b[32m✓ Updated CHANGELOG.md\x1b[0m`)
 
-  // 4. Git stage & commit (NO tags)
+  // 4. Git stage & commit (NO tags). dist/ is gitignored — do not stage it.
   const filesToStage = ['package.json', 'manifest.json', 'CHANGELOG.md']
-  if (existsSync(distManifestPath)) {
-    filesToStage.push('dist/manifest.json')
-  }
   run(`git add ${filesToStage.join(' ')}`)
   run(`git commit -m "chore: bump version to ${newVersion}"`)
   console.log(`\x1b[32m✓ Created commit: chore: bump version to ${newVersion} (no git tags)\x1b[0m`)
