@@ -1,0 +1,538 @@
+// Student Statuses (Human Boost)
+// 3-dots settings button pinned directly to right edge of student cell
+.ha-status-dots-btn {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  opacity: 0.35;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: all 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+    background: #e2e8f0;
+    color: #0f172a;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+}
+
+// Ensure student name does not collide with the right-edge 3-dots button
+.smart-cell--width-270 .bem-user {
+  padding-right: 24px;
+}
+
+// Absolute corner status tag in bottom-right corner of student's cell
+.ha-status-corner-tag {
+  position: absolute;
+  right: 6px;
+  bottom: 3px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: lowercase;
+  padding: 2px 5px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  font-family: inherit;
+  transition: all 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.ha-corner--withdrawn {
+  color: #b91c1c;
+  background: #fee2e2;
+}
+
+.ha-corner--family {
+  color: #1d4ed8;
+  background: #eff6ff;
+}
+
+.ha-corner--abroad {
+  color: #b45309;
+  background: #fef3c7;
+}
+
+// Dropdown Popover
+.ha-status-dropdown {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.15),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  min-width: 165px;
+  padding: 6px;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  animation: haDropdownIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &--upwards {
+    animation: haDropdownInUp 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ha-status-dropdown-header {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
+    padding: 4px 8px 6px;
+  }
+
+  .ha-status-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+
+    &:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    &--active {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .ha-status-check {
+      margin-left: auto;
+      color: #2563eb;
+    }
+  }
+
+  .ha-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .ha-status-dot--standard {
+    background: #16a34a;
+  }
+  .ha-status-dot--withdrawn {
+    background: #dc2626;
+  }
+  .ha-status-dot--family {
+    background: #2563eb;
+  }
+  .ha-status-dot--abroad {
+    background: #d97706;
+  }
+}
+
+// Visual indications on gradebook rows
+.ha-row--withdrawn {
+  .bem-user__name {
+    text-decoration: line-through;
+    opacity: 0.65;
+  }
+}
+
+// Conflict highlighting: when an inactive student has 'Н' in a cell, or missing mandatory work
+.ha-cell--conflict,
+.gradebook-narrow__cell.ha-cell--conflict,
+.smart-cell.ha-cell--conflict,
+.ha-cell--mandatory-missing,
+.gradebook-narrow__cell.ha-cell--mandatory-missing,
+.smart-cell.ha-cell--mandatory-missing {
+  background-color: #ffedd5 !important;
+  transition: none !important;
+
+  // Custom subtle contour is applied strictly when the cell is NOT selected/focused,
+  // allowing Human.ua's standard focus/selection contour to apply naturally
+  &:not(.smart-cell--selected):not(:focus):not(:focus-within) {
+    box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.35) !important;
+    transition: none !important;
+  }
+
+  // Slightly darker background when focused/selected
+  &.smart-cell--selected,
+  &:focus,
+  &:focus-within {
+    background-color: #fed7aa !important;
+    transition: none !important;
+  }
+}
+
+// Grade mismatch: "Заняття" and "Завдання" have different values in the same lesson
+.ha-cell--grade-mismatch,
+.gradebook-narrow__cell.ha-cell--grade-mismatch,
+.smart-cell.ha-cell--grade-mismatch {
+  background-color: #fef9c3 !important;
+  transition: none !important;
+
+  &:not(.smart-cell--selected):not(:focus):not(:focus-within) {
+    box-shadow: inset 0 0 0 1px rgba(202, 138, 4, 0.4) !important;
+    transition: none !important;
+  }
+
+  &.smart-cell--selected,
+  &:focus,
+  &:focus-within {
+    background-color: #fde68a !important;
+    transition: none !important;
+  }
+}
+
+// Styled floating tooltip for Human Boost warnings
+.ha-styled-tooltip {
+  position: fixed;
+  z-index: 9999999;
+  background: #1e293b;
+  color: #f8fafc;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1.35;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    0 2px 4px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(3px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease,
+    visibility 0.12s;
+  white-space: normal;
+  text-align: center;
+  max-width: 260px;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #1e293b;
+  }
+
+  &--bottom::after {
+    bottom: auto;
+    top: -4px;
+    border-top: none;
+    border-bottom: 5px solid #1e293b;
+  }
+}
+
+@keyframes haDropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes haDropdownInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// Mandatory lesson (practical, control, diagnostic work) header container highlight
+.gradebook-narrow__header-container.ha-header-mandatory-lesson,
+.g-main-header__head.ha-header-mandatory-lesson {
+  background-color: #ebf3ff !important;
+  transition: background-color 0.2s ease;
+}
+
+// Today’s date marker: inline dot before `.date__day-number`
+.ha-today-date-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 18px;
+  margin-right: 3px;
+  border-radius: 50%;
+  background-color: #2563eb;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+// Student Statuses styling in Lesson Side Panel (left-panel and user-item)
+.user-item,
+.bem-user,
+.left-panel .bem-user,
+[class*='left-panel'] .bem-user,
+.mat-drawer .bem-user {
+  position: relative !important;
+
+  &.ha-user--withdrawn,
+  &.ha-row--withdrawn {
+    .name,
+    .bem-user__name {
+      text-decoration: line-through !important;
+      opacity: 0.65 !important;
+    }
+  }
+
+  .ha-conflict-warning-emoji {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13px !important;
+    line-height: 1 !important;
+    margin-left: 6px !important;
+    cursor: help !important;
+    user-select: none !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    border: none !important;
+    outline: none !important;
+    transition: transform 0.15s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      transform: scale(1.2);
+      box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      background: transparent !important;
+      border: none !important;
+      outline: none !important;
+    }
+  }
+
+  .ha-lesson-status-tag {
+    position: absolute;
+    right: 8px;
+    bottom: 3px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: lowercase;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+    font-family: inherit;
+    transition: all 0.15s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .ha-status-dots-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    opacity: 0.35;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    outline: none;
+    flex-shrink: 0;
+    position: relative;
+    top: 0;
+    right: auto;
+    transform: none;
+    transition: all 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+      background: #e2e8f0;
+      color: #0f172a;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+.ha-user--withdrawn,
+.user-item.ha-user--withdrawn,
+.bem-user.ha-user--withdrawn,
+.bem-user.ha-row--withdrawn {
+  .name,
+  .bem-user__name {
+    text-decoration: line-through !important;
+    opacity: 0.65 !important;
+  }
+}
+
+// Universal reset for conflict emoji - strictly no box-shadow, border, or background anywhere
+.ha-conflict-warning-emoji,
+span.ha-conflict-warning-emoji,
+[class*='ha-conflict-warning-emoji'] {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+// Disabled student statuses mode: cleanly hide all badges, buttons, conflicts & strikethroughs
+body.ha-disable-student-statuses {
+  .ha-status-corner-tag,
+  .ha-status-dots-btn,
+  .ha-lesson-status-tag,
+  .ha-conflict-warning-emoji,
+  .ha-status-dropdown {
+    display: none !important;
+  }
+
+  .ha-cell--conflict,
+  .gradebook-narrow__cell.ha-cell--conflict,
+  .smart-cell.ha-cell--conflict {
+    background-color: inherit !important;
+    transition: none !important;
+    &:not(.smart-cell--selected):not(:focus) {
+      box-shadow: none !important;
+    }
+  }
+
+  .ha-user--withdrawn,
+  .ha-row--withdrawn,
+  .user-item.ha-user--withdrawn,
+  .bem-user.ha-user--withdrawn,
+  .bem-user.ha-row--withdrawn {
+    .name,
+    .bem-user__name {
+      text-decoration: none !important;
+      opacity: 1 !important;
+    }
+  }
+}
+
+// Disabled inactive student 'Н' highlight: hide warning emoji on lesson page & reset conflict cells
+body.ha-disable-inactive-absent-highlight {
+  .ha-conflict-warning-emoji {
+    display: none !important;
+  }
+
+  .ha-cell--conflict,
+  .gradebook-narrow__cell.ha-cell--conflict,
+  .smart-cell.ha-cell--conflict {
+    background-color: inherit !important;
+    transition: none !important;
+    &:not(.smart-cell--selected):not(:focus) {
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Disabled mandatory works highlight: revert header container background & missing grade cells
+body.ha-disable-mandatory-works-highlight {
+  .gradebook-narrow__header-container.ha-header-mandatory-lesson,
+  .g-main-header__head.ha-header-mandatory-lesson {
+    background-color: inherit !important;
+  }
+
+  .ha-cell--mandatory-missing,
+  .gradebook-narrow__cell.ha-cell--mandatory-missing,
+  .smart-cell.ha-cell--mandatory-missing {
+    background-color: inherit !important;
+    transition: none !important;
+    &:not(.smart-cell--selected):not(:focus) {
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Disabled Заняття/Завдання grade mismatch highlight
+body.ha-disable-grade-mismatch-highlight {
+  .ha-cell--grade-mismatch,
+  .gradebook-narrow__cell.ha-cell--grade-mismatch,
+  .smart-cell.ha-cell--grade-mismatch {
+    background-color: inherit !important;
+    transition: none !important;
+    &:not(.smart-cell--selected):not(:focus):not(:focus-within) {
+      box-shadow: none !important;
+    }
+  }
+}

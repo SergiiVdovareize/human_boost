@@ -1,0 +1,61 @@
+@use 'tokens' as *;
+
+// -----------------------------------------------------------------------------
+// Progress Bar
+// -----------------------------------------------------------------------------
+@keyframes haProgressStripes {
+  0% {
+    background-position-x: 1rem;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
+
+.ha-progress,
+.progress {
+  display: flex;
+  height: 1.5rem;
+  overflow: hidden;
+  font-size: 0.75rem;
+  background-color: $ha-gray-200;
+  border-radius: $ha-radius-full;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+
+  .ha-progress-bar,
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: $ha-primary;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    transition: width 0.3s ease;
+
+    &--success,
+    &.bg-success {
+      background-color: $ha-success;
+    }
+
+    &--animated,
+    &.progress-bar-animated {
+      background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.18) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.18) 50%,
+        rgba(255, 255, 255, 0.18) 75%,
+        transparent 75%,
+        transparent
+      );
+      background-size: 1rem 1rem;
+      animation: haProgressStripes 1s linear infinite;
+    }
+  }
+}

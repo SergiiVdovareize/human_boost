@@ -1,0 +1,83 @@
+@use 'tokens' as *;
+
+// -----------------------------------------------------------------------------
+// Accordion
+// -----------------------------------------------------------------------------
+.ha-accordion,
+.accordion {
+  border: 1px solid $ha-gray-200;
+  border-radius: $ha-radius-lg;
+  overflow: hidden;
+  background-color: #ffffff;
+  font-family: $ha-font-sans;
+  box-sizing: border-box;
+
+  .ha-accordion-item,
+  .accordion-item {
+    border: none;
+    &:not(:first-child) {
+      border-top: 1px solid $ha-gray-200;
+    }
+  }
+
+  .ha-accordion-header,
+  .accordion-header {
+    margin: 0;
+  }
+
+  .ha-accordion-button,
+  .accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: $ha-gray-800;
+    text-align: left;
+    background-color: $ha-gray-50;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    cursor: pointer;
+    font-family: $ha-font-sans;
+    transition:
+      background-color $ha-transition-fast,
+      color $ha-transition-fast;
+
+    &:hover {
+      background-color: $ha-gray-100;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $ha-primary;
+    }
+
+    .ha-accordion-icon {
+      transition: transform $ha-transition-normal;
+      color: $ha-gray-500;
+
+      &--rotated {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .ha-accordion-body,
+  .accordion-body {
+    padding: 0.85rem 1rem;
+    font-size: 0.85rem;
+    color: $ha-gray-700;
+    line-height: 1.5;
+    background-color: #ffffff;
+    border-top: 1px solid $ha-gray-200;
+
+    p {
+      margin-bottom: 0.5rem;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

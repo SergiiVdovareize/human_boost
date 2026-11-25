@@ -1,0 +1,215 @@
+@use 'tokens' as *;
+
+// -----------------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------------
+.ha-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $ha-font-sans;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: $ha-radius-md;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  transition: all $ha-transition-fast;
+  box-sizing: border-box;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($ha-primary, 0.35);
+  }
+
+  &:disabled,
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  // Sizes
+  &--sm {
+    padding: 0.25rem 0.65rem;
+    font-size: 0.775rem;
+    border-radius: $ha-radius-sm;
+  }
+
+  &--md {
+    padding: 0.45rem 0.95rem;
+    font-size: 0.875rem;
+  }
+
+  &--lg {
+    padding: 0.65rem 1.25rem;
+    font-size: 1rem;
+  }
+
+  // Variants
+  &--primary {
+    background-color: $ha-primary;
+    color: #ffffff;
+    border-color: $ha-primary;
+
+    &:hover {
+      background-color: $ha-primary-hover;
+      border-color: $ha-primary-hover;
+    }
+    &:active {
+      background-color: $ha-primary-active;
+    }
+  }
+
+  &--secondary {
+    background-color: $ha-secondary;
+    color: #ffffff;
+    border-color: $ha-secondary;
+
+    &:hover {
+      background-color: $ha-secondary-hover;
+    }
+  }
+
+  &--success {
+    background-color: $ha-success;
+    color: #ffffff;
+    border-color: $ha-success;
+
+    &:hover {
+      background-color: $ha-success-hover;
+    }
+  }
+
+  &--danger {
+    background-color: $ha-danger;
+    color: #ffffff;
+    border-color: $ha-danger;
+
+    &:hover {
+      background-color: $ha-danger-hover;
+    }
+  }
+
+  &--warning {
+    background-color: $ha-warning;
+    color: #ffffff;
+    border-color: $ha-warning;
+
+    &:hover {
+      background-color: $ha-warning-hover;
+    }
+  }
+
+  &--info {
+    background-color: $ha-info;
+    color: #ffffff;
+    border-color: $ha-info;
+
+    &:hover {
+      background-color: $ha-info-hover;
+    }
+  }
+
+  &--outline-primary {
+    background-color: transparent;
+    color: $ha-primary;
+    border-color: $ha-primary;
+
+    &:hover {
+      background-color: $ha-primary;
+      color: #ffffff;
+    }
+  }
+
+  &--outline-danger {
+    background-color: transparent;
+    color: $ha-danger;
+    border-color: $ha-danger;
+
+    &:hover {
+      background-color: $ha-danger;
+      color: #ffffff;
+    }
+  }
+
+  &--outline-secondary {
+    background-color: transparent;
+    color: $ha-secondary;
+    border-color: $ha-secondary;
+
+    &:hover {
+      background-color: $ha-secondary;
+      color: #ffffff;
+    }
+  }
+}
+
+// Universal Close Button (used in all modals, panels, popups, automation blocks and toasts)
+.ha-close-btn,
+.ha-btn-close,
+.btn-close,
+.ha-side-panel__close-btn,
+.ha-mandatory-popup__btn-close,
+.ha-mandatory-popup__close-btn,
+.ha-automation-close-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: #64748b !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  outline: none !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+
+  &:hover {
+    color: #0f172a !important;
+    background-color: #f1f5f9 !important;
+  }
+
+  &:active {
+    background-color: #e2e8f0 !important;
+    transform: scale(0.94) !important;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25) !important;
+  }
+
+  &--white,
+  &.btn-close-white {
+    color: rgba(255, 255, 255, 0.75) !important;
+
+    &:hover {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.25) !important;
+      transform: scale(0.94) !important;
+    }
+  }
+
+  &--sm {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  &--lg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}

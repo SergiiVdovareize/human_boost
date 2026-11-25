@@ -1,0 +1,65 @@
+@use 'tokens' as *;
+
+// -----------------------------------------------------------------------------
+// Tables
+// -----------------------------------------------------------------------------
+.ha-table,
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: $ha-gray-800;
+  vertical-align: top;
+  border-collapse: collapse;
+  font-family: $ha-font-sans;
+  font-size: 0.875rem;
+
+  th,
+  td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid $ha-gray-200;
+    box-sizing: border-box;
+  }
+
+  th {
+    font-weight: 600;
+    color: $ha-gray-700;
+    background-color: $ha-gray-50;
+  }
+
+  &--bordered,
+  &.table-bordered {
+    border: 1px solid $ha-gray-200;
+    th,
+    td {
+      border: 1px solid $ha-gray-200;
+    }
+  }
+
+  &--hover,
+  &.table-hover {
+    tbody tr:hover {
+      background-color: $ha-gray-50;
+    }
+  }
+
+  &--striped,
+  &.table-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: rgba($ha-gray-50, 0.6);
+    }
+  }
+
+  &--sm,
+  &.table-sm {
+    th,
+    td {
+      padding: 0.3rem 0.5rem;
+    }
+  }
+}
+
+.ha-table-responsive,
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

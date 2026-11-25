@@ -1,0 +1,80 @@
+// -----------------------------------------------------------------------------
+// Scoped Utility Helpers (Zero impact on human.ua)
+// -----------------------------------------------------------------------------
+.d-flex {
+  display: flex !important;
+}
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.justify-content-center {
+  justify-content: center !important;
+}
+.align-items-center {
+  align-items: center !important;
+}
+
+.gap-1 {
+  gap: 0.25rem !important;
+}
+.gap-2 {
+  gap: 0.5rem !important;
+}
+.gap-3 {
+  gap: 1rem !important;
+}
+
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+.mt-2 {
+  margin-top: 0.5rem !important;
+}
+.mt-3 {
+  margin-top: 1rem !important;
+}
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+.ms-1 {
+  margin-left: 0.25rem !important;
+}
+
+.p-3 {
+  padding: 1rem !important;
+}
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.fw-bold {
+  font-weight: 700 !important;
+}
+.fst-italic {
+  font-style: italic !important;
+}
+.text-center {
+  text-align: center !important;
+}
+.text-white {
+  color: #ffffff !important;
+}
+.align-middle {
+  vertical-align: middle !important;
+}
+
+@keyframes ha-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ha-spin {
+  animation: ha-spin 0.85s linear infinite;
+}

@@ -1,0 +1,53 @@
+// =============================================================================
+// Human Boost — UI Design Tokens & Theme Variables
+// =============================================================================
+
+$ha-font-sans:
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  Roboto,
+  Helvetica,
+  Arial,
+  sans-serif;
+$ha-radius-sm: 6px;
+$ha-radius-md: 8px;
+$ha-radius-lg: 12px;
+$ha-radius-xl: 16px;
+$ha-radius-full: 9999px;
+
+$ha-primary: #2563eb;
+$ha-primary-hover: #1d4ed8;
+$ha-primary-active: #1e40af;
+$ha-primary-light: #eff6ff;
+
+$ha-secondary: #64748b;
+$ha-secondary-hover: #475569;
+
+$ha-success: #16a34a;
+$ha-success-hover: #15803d;
+$ha-success-light: #f0fdf4;
+
+$ha-danger: #dc2626;
+$ha-danger-hover: #b91c1c;
+$ha-danger-light: #fef2f2;
+
+$ha-warning: #d97706;
+$ha-warning-hover: #b45309;
+
+$ha-info: #0284c7;
+$ha-info-hover: #0369a1;
+
+$ha-gray-50: #f8fafc;
+$ha-gray-100: #f1f5f9;
+$ha-gray-200: #e2e8f0;
+$ha-gray-300: #cbd5e1;
+$ha-gray-400: #94a3b8;
+$ha-gray-500: #64748b;
+$ha-gray-600: #475569;
+$ha-gray-700: #334155;
+$ha-gray-800: #1e293b;
+$ha-gray-900: #0f172a;
+
+$ha-transition-fast: 0.15s ease;
+$ha-transition-normal: 0.2s ease;

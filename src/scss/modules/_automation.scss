@@ -1,0 +1,332 @@
+// Automation: Cell preview highlight for copy grades & mandatory grades (green tint to differentiate from blue focused cell)
+// Must have top specificity to cleanly override .ha-cell--mandatory-missing, .ha-cell--conflict, and .ha-col-highlight--cell
+.gradebook-container__table2-outlet .gradebook-narrow__cell.ha-cell--copy-preview,
+.gradebook-container__table2-outlet .smart-cell.ha-cell--copy-preview,
+.gradebook-narrow__cell.smart-cell.ha-cell--copy-preview,
+.gradebook-narrow__cell.ha-cell--copy-preview,
+.smart-cell.ha-cell--copy-preview,
+.ha-cell--copy-preview {
+  &,
+  &:not(.smart-cell--selected):not(:focus):not(:focus-within),
+  &.smart-cell--selected,
+  &:focus,
+  &:focus-within,
+  &.ha-cell--mandatory-missing,
+  &.ha-cell--mandatory-missing:not(.smart-cell--selected):not(:focus):not(:focus-within),
+  &.ha-cell--conflict,
+  &.ha-cell--conflict:not(.smart-cell--selected):not(:focus):not(:focus-within),
+  &.ha-col-highlight--cell {
+    box-shadow: inset 0 0 0 2px #059669 !important;
+    transition: all 0.15s ease !important;
+  }
+}
+
+// Automation block in SidePanel
+.ha-automation-card {
+  border-radius: 10px;
+}
+
+.ha-automation-entry {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  &__badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 1px 7px;
+    border-radius: 5px;
+  }
+
+  &__desc {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+}
+
+.ha-automation-open-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #1d4ed8;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  }
+}
+
+.ha-automation-settings {
+  display: flex;
+  flex-direction: column;
+  animation: haPopupFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &__top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.ha-automation-period-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-bottom: 11px;
+
+  .ha-automation-period-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #475569;
+  }
+
+  .ha-automation-period-value {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #1e40af;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+}
+
+.ha-automation-sublabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.ha-automation-direction-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 11px;
+}
+
+.ha-automation-direction-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+
+  &:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+
+  &--active {
+    background: #eff6ff !important;
+    border-color: #2563eb !important;
+    color: #1d4ed8 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.15);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .ha-automation-arrow {
+    font-weight: 700;
+    color: #2563eb;
+  }
+}
+
+.ha-automation-checkbox-container {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 11px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
+}
+
+.ha-automation-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  user-select: none;
+}
+
+.ha-automation-checkbox-title {
+  font-size: 12.5px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.ha-automation-checkbox-desc {
+  font-size: 11px;
+  color: #64748b;
+  line-height: 1.35;
+  padding-left: 26px;
+  margin-top: 3px;
+}
+
+.ha-automation-notice {
+  padding: 9px 11px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.15s ease;
+
+  &--success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+  }
+
+  &--empty {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+  }
+}
+
+.ha-automation-footer-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ha-automation-cancel-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: #94a3b8;
+  }
+}
+
+.ha-automation-submit-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #94a3b8;
+    border-color: #64748b;
+  }
+}
+
+.ha-automation-stop-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #dc2626;
+  border: 1.5px solid #fca5a5;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+  }
+}
+
+.ha-automation-empty-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+}

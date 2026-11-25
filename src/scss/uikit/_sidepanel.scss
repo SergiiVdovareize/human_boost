@@ -1,0 +1,257 @@
+@use 'tokens' as *;
+
+// -----------------------------------------------------------------------------
+// Side Panel (True Right Sidebar / Slide-Over on Full Page Height)
+// Open/close: CSS transition + `.ha-side-panel--open` (toggled after mount paint)
+// -----------------------------------------------------------------------------
+.ha-side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 480px;
+  max-width: calc(100vw - 32px);
+  z-index: 100000;
+  background-color: #ffffff;
+  box-shadow:
+    -8px 0 32px rgba(15, 23, 42, 0.16),
+    -2px 0 8px rgba(15, 23, 42, 0.08);
+  border-left: 1px solid $ha-gray-200;
+  box-sizing: border-box;
+  font-family: $ha-font-sans;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  will-change: transform;
+  transform: translateX(100%);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  &:not(.ha-side-panel--open) {
+    pointer-events: none;
+  }
+
+  &__inner,
+  form,
+  .ha-drawer-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    width: 100%;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  &__header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.4rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid $ha-gray-200;
+    position: relative;
+    z-index: 2;
+
+    &-content {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $ha-gray-900;
+    line-height: 1.4;
+  }
+
+  &__close-btn {
+    margin-left: 0.75rem;
+  }
+
+  &__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.25rem 1.4rem;
+    background-color: #f8fafc;
+    color: $ha-gray-800;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color: $ha-gray-300 transparent;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $ha-gray-300;
+      border-radius: 3px;
+      &:hover {
+        background-color: $ha-gray-400;
+      }
+    }
+
+    .card {
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition:
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+
+      &:hover {
+        border-color: rgba(203, 213, 225, 0.9);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  &__footer {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.4rem;
+    background-color: #ffffff;
+    border-top: 1px solid $ha-gray-200;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+    gap: 0.75rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__corner-bar {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.4rem 1.1rem 1.4rem;
+    background-color: #f8fafc;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  &__version {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $ha-gray-400;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    user-select: none;
+  }
+
+  &__close-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0.35rem 0.4rem;
+    color: $ha-gray-600;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $ha-gray-900;
+
+      .ha-close-arrow {
+        transform: translateX(4px);
+      }
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    .ha-close-arrow {
+      transition: transform 0.15s ease;
+    }
+  }
+}
+
+// Card section headers (Automations & Settings)
+.ha-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.85rem;
+  border-bottom: 1.5px solid #e2e8f0;
+
+  &__title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: -0.01em;
+  }
+
+  svg {
+    color: $ha-primary;
+    flex-shrink: 0;
+  }
+}
+
+.ha-settings-subgroup {
+  & + & {
+    margin-top: 1.5rem;
+    padding-top: 1.35rem;
+    border-top: 1.5px solid #e2e8f0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.85rem;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: -0.01em;
+
+    svg {
+      color: $ha-primary;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.ha-setting-item {
+  &--bordered {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid #f1f5f9;
+  }
+}
+
+@media (max-width: 576px) {
+  .ha-side-panel {
+    width: 100vw;
+    max-width: 100vw;
+  }
+}

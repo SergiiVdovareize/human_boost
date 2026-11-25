@@ -1,0 +1,52 @@
+{
+  "name": "human-boost",
+  "private": true,
+  "version": "1.19.0",
+  "type": "module",
+  "author": "Sergii Vdovareize",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergiiVdovareize/human_boost.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "watch:build": "chokidar 'src/**/*' -c 'npm run build:dev'",
+    "build:dev": "tsc -b && DEV=true vite build",
+    "build": "tsc -b && vite build",
+    "pack:store": "npm run build && node scripts/pack-store.mjs",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "preview": "vite preview",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "check": "biome check --write .",
+    "bump": "node scripts/bump-version.mjs",
+    "bump:dry": "node scripts/bump-version.mjs --dry-run",
+    "bump:patch": "node scripts/bump-version.mjs --patch",
+    "bump:minor": "node scripts/bump-version.mjs --minor",
+    "bump:major": "node scripts/bump-version.mjs --major"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.545.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "@types/chrome": "^0.1.24",
+    "@types/node": "^24.7.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "babel-plugin-react-compiler": "^19.1.0-rc.3",
+    "chokidar-cli": "^3.0.0",
+    "sass-embedded": "^1.93.2",
+    "terser": "^5.44.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.12",
+    "vite-plugin-static-copy": "^3.1.4"
+  }
+}

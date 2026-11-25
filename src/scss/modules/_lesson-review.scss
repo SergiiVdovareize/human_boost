@@ -1,0 +1,53 @@
+// -----------------------------------------------------------------------------
+// Lesson Homework Review Styles
+// Button "Не видно роботи" placed next to "Додати вкладення"
+// Rendered in soft warm orange without icons, only when student has no attachments
+// -----------------------------------------------------------------------------
+
+.ha-btn-no-work {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  background-color: #fff7ed !important;
+  color: #c2410c !important;
+  border: 1px solid #fdba74 !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  padding: 0 16px !important;
+  height: 38px !important;
+  margin-left: 10px !important;
+  white-space: nowrap !important;
+  user-select: none !important;
+  box-sizing: border-box !important;
+
+  &:hover {
+    background-color: #ffedd5 !important;
+    border-color: #fb923c !important;
+    color: #9a3412 !important;
+    box-shadow: 0 1px 3px rgba(194, 65, 12, 0.15) !important;
+  }
+
+  &:active {
+    background-color: #fed7aa !important;
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
+}
+
+@keyframes ha-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

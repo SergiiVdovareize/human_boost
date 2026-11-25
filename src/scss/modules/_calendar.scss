@@ -1,0 +1,163 @@
+// Video conference icon highlight on calendar lesson cards:
+// Replaces the pale outline camera icon with a vibrant solid filled camera in #418af5
+$ha-solid-video-camera-svg: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M18.7072%205.88996C18.5234%205.75788%2018.2872%205.72227%2018.0727%205.79452L14.4556%207.01138V5.75781C14.4556%204.78855%2013.6769%204%2012.7197%204H2.73595C1.77875%204%201%204.78855%201%205.75781V14.1953C1%2015.1646%201.77875%2015.9531%202.73595%2015.9531H12.7197C13.6769%2015.9531%2014.4556%2015.1646%2014.4556%2014.1953V12.9417L18.0727%2014.1586C18.2872%2014.2308%2018.5234%2014.1952%2018.7072%2014.0632C18.891%2013.931%2019%2013.7185%2019%2013.4922V6.46094C19%206.2346%2018.891%206.02208%2018.7072%205.88996Z%22%20fill%3D%22%23418af5%22%2F%3E%3C%2Fsvg%3E';
+
+// Strictly scoped to .calendar-event__footer inside .calendar-events-container when enabled
+body:not(.ha-disable-video-conference-highlight) .calendar-events-container .calendar-event__footer {
+  img[src*='video.svg'],
+  img[src*='/assets/images/video'],
+  img[alt='video-conference'] {
+    content: url('#{$ha-solid-video-camera-svg}') !important;
+  }
+
+  [style*='video.svg'] {
+    background-image: url('#{$ha-solid-video-camera-svg}') !important;
+  }
+
+  svg path[d^='M18.7072'] {
+    d: path(
+      'M18.7072 5.88996C18.5234 5.75788 18.2872 5.72227 18.0727 5.79452L14.4556 7.01138V5.75781C14.4556 4.78855 13.6769 4 12.7197 4H2.73595C1.77875 4 1 4.78855 1 5.75781V14.1953C1 15.1646 1.77875 15.9531 2.73595 15.9531H12.7197C13.6769 15.9531 14.4556 15.1646 14.4556 14.1953V12.9417L18.0727 14.1586C18.2872 14.2308 18.5234 14.1952 18.7072 14.0632C18.891 13.931 19 13.7185 19 13.4922V6.46094C19 6.2346 18.891 6.02208 18.7072 5.88996Z'
+    ) !important;
+    fill: #418af5 !important;
+  }
+}
+
+// Self-study lesson icon (displayed when lesson is created and no video conference is assigned)
+// Rendered via CSS pseudo-element ::after on .calendar-event__footer-left to always appear second (after clip icon)
+$ha-self-study-book-green-svg: 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%23bbf7d0%22%20stroke%3D%22%2316a34a%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M2%203h6a4%204%200%200%201%204%204v14a3%203%200%200%200-3-3H2z%22%2F%3E%3Cpath%20d%3D%22M22%203h-6a4%204%200%200%201-4%204v14a3%203%200%200%201%203-3h7z%22%2F%3E%3C%2Fsvg%3E';
+
+body:not(.ha-disable-video-conference-highlight) {
+  .calendar-event.ha-self-study-lesson {
+    .calendar-event__footer-left {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 4px;
+
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        vertical-align: middle;
+        background-image: url('#{$ha-self-study-book-green-svg}');
+        background-size: 18px 18px;
+        background-repeat: no-repeat;
+        background-position: center;
+        cursor: help;
+        opacity: 1;
+      }
+    }
+
+    // Fallback if footer has no footer-left
+    .calendar-event__footer:not(:has(.calendar-event__footer-left))::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      background-image: url('#{$ha-self-study-book-green-svg}');
+      background-size: 18px 18px;
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: help;
+      opacity: 1;
+    }
+  }
+}
+
+// Unpublished lessons and missing tasks highlight on calendar page:
+// Strictly highlights cards where the lesson itself (заняття) is unpublished,
+// or where no task (завдання) has been issued for a lesson that ended 3+ hours ago.
+body:not(.ha-disable-unpublished-highlight) {
+  // Highlight strictly the unpublished lesson or missing task card itself
+  .calendar-event.ha-lesson-unpublished,
+  .calendar-event.ha-task-missing {
+    background: #fffbeb !important;
+  }
+}
+
+// Immediately suppress all calendar highlights and self-study icons while week data is loading
+body.ha-calendar-week-loading {
+  .ha-self-study-lesson .calendar-event__footer-left::after {
+    display: none !important;
+  }
+  .calendar-event.ha-lesson-unpublished,
+  .calendar-event.ha-task-missing {
+    background: transparent !important;
+  }
+  .ha-card-note,
+  .ha-card-notes-container {
+    display: none !important;
+  }
+}
+
+// Absolute bottom-right inscription container for calendar cards
+.calendar-event {
+  &:not([style*="position: absolute"]) {
+    position: relative;
+  }
+}
+
+.ha-card-notes-container {
+  position: absolute !important;
+  right: 5px !important;
+  bottom: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 3px !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+}
+
+.ha-card-note {
+  display: inline-flex;
+  align-items: center;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 2px 4.5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+
+  // "урок не опубліковано" - soft rose/red
+  &--lesson {
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+  }
+
+  // "урок не створено" - soft rose/red without card background
+  &--uncreated {
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+  }
+
+  // "завдання не видано" - warm amber/orange
+  &--task {
+    background-color: #ffedd5 !important;
+    color: #c2410c !important;
+  }
+}
+
+// Fallback if note is appended directly to .calendar-event
+.calendar-event > .ha-card-note {
+  position: absolute !important;
+  right: 5px !important;
+  bottom: 4px !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+}
+
+body.ha-disable-unpublished-highlight {
+  .ha-card-note,
+  .ha-card-notes-container {
+    display: none !important;
+  }
+}

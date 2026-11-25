@@ -1,0 +1,150 @@
+@use 'tokens' as *;
+
+// -----------------------------------------------------------------------------
+// Modals & Keyframes
+// -----------------------------------------------------------------------------
+@keyframes haModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes haModalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.ha-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $ha-font-sans;
+  box-sizing: border-box;
+
+  .ha-modal-backdrop,
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(2px);
+    animation: haModalFadeIn 0.2s ease-out;
+  }
+
+  .ha-modal-dialog,
+  .modal-dialog {
+    position: relative;
+    z-index: 1000000;
+    width: 100%;
+    max-width: 520px;
+    margin: 1.5rem;
+    pointer-events: auto;
+    animation: haModalPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+
+    &--centered,
+    &.modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      min-height: calc(100% - 3rem);
+    }
+
+    &--sm,
+    &.modal-sm {
+      max-width: 380px;
+    }
+
+    &--lg,
+    &.modal-lg {
+      max-width: 720px;
+    }
+
+    &--xl,
+    &.modal-xl {
+      max-width: 960px;
+    }
+
+    .btn-close,
+    .ha-btn-close {
+      position: absolute;
+      right: 0.75rem;
+      top: 0.75rem;
+    }
+
+    .modal-title,
+    .ha-modal-title {
+      .lucide {
+        margin-top: 0.1rem;
+      }
+    }
+  }
+
+  .ha-modal-content,
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: $ha-radius-xl;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    outline: 0;
+    overflow: hidden;
+    max-height: 90vh;
+    box-sizing: border-box;
+  }
+
+  .ha-modal-header,
+  .modal-header {
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid $ha-gray-200;
+    background-color: #ffffff;
+    position: relative;
+
+    .ha-modal-title,
+    .modal-title {
+      margin: 0;
+      line-height: 1.5;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $ha-gray-900;
+    }
+  }
+
+  .ha-modal-body,
+  .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1.15rem 1.25rem;
+    overflow-y: auto;
+    color: $ha-gray-800;
+    font-size: 0.875rem;
+    box-sizing: border-box;
+  }
+
+  .ha-modal-footer,
+  .modal-footer {
+    display: flex;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    background-color: $ha-gray-50;
+    border-top: 1px solid $ha-gray-200;
+    gap: 0.5rem;
+  }
+}
